@@ -1,0 +1,172 @@
+{
+  "symptom_matching": {
+    "accuracy": 0.846,
+    "correct": 11,
+    "total": 13,
+    "avg_latency_sec": 4.67,
+    "details": [
+      {
+        "query": "check engine light is on and misfiring",
+        "expected": "Engine misfire",
+        "predicted": "Engine misfire",
+        "correct": true,
+        "latency_sec": 12.55
+      },
+      {
+        "query": "engine feels rough and jerks a bit at idle",
+        "expected": "Engine misfire",
+        "predicted": "Engine misfire",
+        "correct": true,
+        "latency_sec": 4.01
+      },
+      {
+        "query": "temperature gauge is way up in the red zone",
+        "expected": "Engine overheating",
+        "predicted": "Engine overheating",
+        "correct": true,
+        "latency_sec": 4.01
+      },
+      {
+        "query": "steam is coming out from under the hood",
+        "expected": "Engine overheating",
+        "predicted": null,
+        "correct": false,
+        "latency_sec": 3.86
+      },
+      {
+        "query": "brakes make a high pitched squeal when I stop",
+        "expected": "Squealing brakes",
+        "predicted": "Squealing brakes",
+        "correct": true,
+        "latency_sec": 4.04
+      },
+      {
+        "query": "brake pedal feels like it's sinking toward the floor",
+        "expected": "Soft brake pedal",
+        "predicted": "Soft brake pedal",
+        "correct": true,
+        "latency_sec": 3.94
+      },
+      {
+        "query": "car won't crank at all when I turn the key",
+        "expected": "Car won't start",
+        "predicted": "Car won't start",
+        "correct": true,
+        "latency_sec": 4.13
+      },
+      {
+        "query": "headlights get noticeably dim especially at idle",
+        "expected": "Dim headlights while driving",
+        "predicted": "Dim headlights while driving",
+        "correct": true,
+        "latency_sec": 4.05
+      },
+      {
+        "query": "RPM rises but the car doesn't actually speed up, gears feel like they're slipping",
+        "expected": "Slipping gears",
+        "predicted": "Slipping gears",
+        "correct": true,
+        "latency_sec": 4.02
+      },
+      {
+        "query": "one of my tires is wearing down unevenly on the inside edge",
+        "expected": "Uneven tire wear",
+        "predicted": "Uneven tire wear",
+        "correct": true,
+        "latency_sec": 4.05
+      },
+      {
+        "query": "my EV is charging much slower than it used to",
+        "expected": "Slow charging speed",
+        "predicted": "Slow charging speed",
+        "correct": true,
+        "latency_sec": 3.94
+      },
+      {
+        "query": "the range estimate has dropped a lot recently",
+        "expected": "Reduced EV range",
+        "predicted": "Reduced EV range",
+        "correct": true,
+        "latency_sec": 4.04
+      },
+      {
+        "query": "the car won't start charging at all when I plug it in",
+        "expected": "Charging fails to start",
+        "predicted": "Reduced EV range",
+        "correct": false,
+        "latency_sec": 4.01
+      }
+    ]
+  },
+  "vehicle_retrieval": {
+    "vehicle_match_precision": 0.5,
+    "correct": 4,
+    "total": 8,
+    "details": [
+      {
+        "query": "how do I reset the tire pressure monitoring system",
+        "vehicle": "Toyota Corolla (2025)",
+        "expected_source": "TOYOTA 2025(Corolla).pdf",
+        "actual_source": "TOYOTA 2025(Corolla).pdf",
+        "score": 0.721,
+        "correct": true
+      },
+      {
+        "query": "what is the recommended engine oil type",
+        "vehicle": "Honda Civic (2025)",
+        "expected_source": "2025 Civic sedan.pdf",
+        "actual_source": "2025 Civic sedan.pdf",
+        "score": 0.626,
+        "correct": true
+      },
+      {
+        "query": "how do I use adaptive cruise control",
+        "vehicle": "Tata Harrier BS6 (2026)",
+        "expected_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "actual_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "score": 0.645,
+        "correct": true
+      },
+      {
+        "query": "how do I engage four wheel drive mode",
+        "vehicle": "Maruti Suzuki Jimny",
+        "expected_source": "NEXA-Jimny-Petrol-Manual-latestpdf.pdf",
+        "actual_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "score": 0.511,
+        "correct": false
+      },
+      {
+        "query": "how do I pair my phone via bluetooth",
+        "vehicle": "Toyota Corolla (2025)",
+        "expected_source": "TOYOTA 2025(Corolla).pdf",
+        "actual_source": "2025 Civic sedan.pdf",
+        "score": 0.615,
+        "correct": false
+      },
+      {
+        "query": "what does the check engine light mean",
+        "vehicle": "Honda Civic (2025)",
+        "expected_source": "2025 Civic sedan.pdf",
+        "actual_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "score": 0.546,
+        "correct": false
+      },
+      {
+        "query": "how do I fold the rear seats",
+        "vehicle": "Tata Harrier BS6 (2026)",
+        "expected_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "actual_source": "harrier-bs6-owners-manual-april-2026.pdf",
+        "score": 0.704,
+        "correct": true
+      },
+      {
+        "query": "how do I check tire pressure",
+        "vehicle": "Maruti Suzuki Jimny",
+        "expected_source": "NEXA-Jimny-Petrol-Manual-latestpdf.pdf",
+        "actual_source": "TOYOTA 2025(Corolla).pdf",
+        "score": 0.717,
+        "correct": false
+      }
+    ]
+  }
+}

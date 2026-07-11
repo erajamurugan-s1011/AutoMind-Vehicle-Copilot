@@ -1,0 +1,21 @@
+# Python virtual environment
+venv/
+
+# Large/generated data artifacts
+*.pdf
+*.pkl
+*.faiss
+*.jsonl
+*.parquet
+*.db
+*.sqlite
+*.sqlite3
+*.bin
+*.npy
+*.npz
+
+# OS / editor noise
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store

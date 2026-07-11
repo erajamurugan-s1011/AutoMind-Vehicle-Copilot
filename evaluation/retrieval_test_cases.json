@@ -1,0 +1,10 @@
+[
+  {"query": "how do I reset the tire pressure monitoring system", "vehicle": "Toyota Corolla (2025)", "expected_source_file": "TOYOTA 2025(Corolla).pdf"},
+  {"query": "what is the recommended engine oil type", "vehicle": "Honda Civic (2025)", "expected_source_file": "2025 Civic sedan.pdf"},
+  {"query": "how do I use adaptive cruise control", "vehicle": "Tata Harrier BS6 (2026)", "expected_source_file": "harrier-bs6-owners-manual-april-2026.pdf"},
+  {"query": "how do I engage four wheel drive mode", "vehicle": "Maruti Suzuki Jimny", "expected_source_file": "NEXA-Jimny-Petrol-Manual-latestpdf.pdf"},
+  {"query": "how do I pair my phone via bluetooth", "vehicle": "Toyota Corolla (2025)", "expected_source_file": "TOYOTA 2025(Corolla).pdf"},
+  {"query": "what does the check engine light mean", "vehicle": "Honda Civic (2025)", "expected_source_file": "2025 Civic sedan.pdf"},
+  {"query": "how do I fold the rear seats", "vehicle": "Tata Harrier BS6 (2026)", "expected_source_file": "harrier-bs6-owners-manual-april-2026.pdf"},
+  {"query": "how do I check tire pressure", "vehicle": "Maruti Suzuki Jimny", "expected_source_file": "NEXA-Jimny-Petrol-Manual-latestpdf.pdf"}
+]

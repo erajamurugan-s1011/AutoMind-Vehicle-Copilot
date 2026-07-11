@@ -1,0 +1,15 @@
+[
+  {"query": "check engine light is on and misfiring", "expected_symptom": "Engine misfire"},
+  {"query": "engine feels rough and jerks a bit at idle", "expected_symptom": "Engine misfire"},
+  {"query": "temperature gauge is way up in the red zone", "expected_symptom": "Engine overheating"},
+  {"query": "steam is coming out from under the hood", "expected_symptom": "Engine overheating"},
+  {"query": "brakes make a high pitched squeal when I stop", "expected_symptom": "Squealing brakes"},
+  {"query": "brake pedal feels like it's sinking toward the floor", "expected_symptom": "Soft brake pedal"},
+  {"query": "car won't crank at all when I turn the key", "expected_symptom": "Car won't start"},
+  {"query": "headlights get noticeably dim especially at idle", "expected_symptom": "Dim headlights while driving"},
+  {"query": "RPM rises but the car doesn't actually speed up, gears feel like they're slipping", "expected_symptom": "Slipping gears"},
+  {"query": "one of my tires is wearing down unevenly on the inside edge", "expected_symptom": "Uneven tire wear"},
+  {"query": "my EV is charging much slower than it used to", "expected_symptom": "Slow charging speed"},
+  {"query": "the range estimate has dropped a lot recently", "expected_symptom": "Reduced EV range"},
+  {"query": "the car won't start charging at all when I plug it in", "expected_symptom": "Charging fails to start"}
+]

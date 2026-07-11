@@ -1,0 +1,68 @@
+python -m venv venv
+venv\Scripts\activate
+$env:PYTHONUTF8=1
+pip install -r requirements.txt
+
+#password now matches Docker: automind123
+
+
+#One time
+$env:PYTHONUTF8=1
+python -m src.ingestion.pdf_parser
+python -m src.ingestion.chunker
+python -m src.rag.vector_store
+
+docker compose -f docker/docker-compose.neo4j.yml up -d
+
+python -m src.knowledge_graph.kg_builder
+python -m src.knowledge_graph.kg_query
+#IMPORTANT
+Also — pop open http://localhost:7474, log in (USERNAME - neo4j / PASSWORD - automind123), and run:
+cypherMATCH (n) RETURN n LIMIT 100
+
+ollama pull qwen2.5:7b
+
+python -m src.agent.llm
+python -m src.agent.graph
+
+uvicorn src.api.main:app --reload --port 8000
+1.Click POST /auth/login → Try it out → username demo, password automind123 → Execute → copy the ({
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZW1vIiwiZXhwIjoxNzgzNjY5NzQ3fQ.y-p1EtYKf52rfRSQBTlk_Nv8Kmh6sGyN9BFRIoW5mfc",
+  "token_type": "bearer"
+}) from the response
+
+$env:PYTHONUTF8=1
+python -m evaluation.eval_script
+
+#backend terminal
+docker compose -f docker/docker-compose.neo4j.yml up -d
+docker compose -f docker/docker-compose.neo4j.yml down
+docker compose -f docker/docker-compose.yml up -d --build
+python -m src.knowledge_graph.kg_builder
+ollama serve   # if not already running as a background service
+uvicorn src.api.main:app --reload --port 8000
+
+#frontend terminal
+streamlit run frontend/app.py
+
+#sample query 
+1."The brakes are squealing when I stop" 
+2."My car won't start, just clicking noise" 
+3."The temperature gauge is in the red and steam is coming from the hood" 
+4."I'm getting slipping gears, RPM goes up but the car doesn't speed up" → 
+5."One of my tires is wearing unevenly on the inside edge" → 
+
+6. "How do I reset the tire pressure monitoring system?"
+7. "How do I pair my phone via Bluetooth?"
+8. "What's the recommended engine oil type?"
+9. "How do I use adaptive cruise control?"
+10. "Hey, what can you help me with?"
+
+$env:LLM_PROVIDER="groq"
+$env:GROQ_API_KEY="paste_your_key_here"
+python -m src.agent.llm
+
+$env:NEO4J_URI="neo4j+s://xxxxxxxx.databases.neo4j.io"
+$env:NEO4J_USER="neo4j"
+$env:NEO4J_PASSWORD="paste_your_generated_password"
+python -m src.knowledge_graph.kg_builder

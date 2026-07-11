@@ -1,0 +1,25 @@
+# AutoMind — FastAPI backend image
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps for faiss / sentence-transformers
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Only what the API needs at runtime — not raw manuals/processed chunks,
+# just the pre-built FAISS index (build it locally first with
+# `python -m src.rag.vector_store` before building this image)
+COPY src/ ./src/
+COPY data/faiss_index/ ./data/faiss_index/
+
+ENV PYTHONUNBUFFERED=1
+EXPOSE 7860
+
+# PORT defaults to 7860 (Hugging Face Spaces' expected port). Local
+# docker-compose.yml overrides this to 8000 via an environment variable.
+CMD ["sh", "-c", "uvicorn src.api.main:app --host 0.0.0.0 --port ${PORT:-7860}"]

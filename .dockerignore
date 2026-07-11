@@ -1,0 +1,11 @@
+# Never send these to the Docker build context — data/manuals alone can be
+# several hundred MB of PDFs, and venv/pycache are pointless bloat.
+venv/
+__pycache__/
+*.pyc
+.git/
+.env
+
+data/manuals/
+data/processed/
+# Note: data/faiss_index/ is intentionally NOT excluded — Dockerfile.api needs it

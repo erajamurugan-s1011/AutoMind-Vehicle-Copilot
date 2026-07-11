@@ -1,0 +1,22 @@
+# ---- Ingestion (this step) ----
+pymupdf==1.24.10
+tiktoken==0.7.0
+
+# ---- Step 2: RAG (embeddings + FAISS) ----
+sentence-transformers==3.0.1
+faiss-cpu==1.8.0.post1
+
+# ---- Step 3: Knowledge Graph ----
+neo4j==5.23.1
+
+# ---- Step 4: LangGraph Agent ----
+langgraph==0.2.28
+
+# ---- Step 5: FastAPI + Auth ----
+fastapi==0.115.0
+uvicorn==0.30.6
+python-jose[cryptography]==3.3.0
+python-multipart==0.0.9
+
+# ---- Step 6: Frontend ----
+streamlit==1.38.0

@@ -1,0 +1,71 @@
+# AutoMind — full stack: Neo4j + FastAPI + Streamlit.
+#
+# Ollama is deliberately NOT containerized here — GPU passthrough to Docker
+# on Windows is unreliable, and there's no benefit to containerizing it for
+# a local demo. Keep running `ollama serve` on your host; containers reach
+# it via host.docker.internal, Docker Desktop's built-in DNS name for the
+# host machine.
+#
+# IMPORTANT — build the FAISS index locally BEFORE building these images:
+#   python -m src.rag.vector_store
+# (Dockerfile.api copies the pre-built index in; it doesn't build it.)
+#
+# Run from the project root:
+#   docker compose -f docker/docker-compose.yml up -d --build
+# Stop:
+#   docker compose -f docker/docker-compose.yml down
+
+services:
+  neo4j:
+    image: neo4j:5.23-community
+    container_name: automind-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/automind123
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:7474"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    container_name: automind-api
+    ports:
+      - "8000:8000"
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=automind123
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - JWT_SECRET_KEY=change-this-in-production
+      - PORT=8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # needed on Linux; harmless on Windows/Mac
+    volumes:
+      - ../logs:/app/logs
+    depends_on:
+      neo4j:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: automind-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://api:8000
+    depends_on:
+      - api
+
+volumes:
+  neo4j_data:
