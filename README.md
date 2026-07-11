@@ -1,3 +1,7 @@
+## 🚀 Live Demo
+- **App:** https://carsgpt.streamlit.app
+- **API docs:** https://automind-vehicle-copilot.onrender.com/docs
+
 # 🚗 AutoMind — Agentic In-Vehicle AI Copilot
 
 AutoMind is an agentic AI assistant that helps drivers understand and diagnose vehicle issues by combining **retrieval-augmented generation (RAG)** over real owner's manuals with a **knowledge-graph reasoning engine** for fault diagnosis — orchestrated by a **LangGraph** agent that decides, turn by turn, whether to search a manual, query the graph, or ask a clarifying question before answering.
