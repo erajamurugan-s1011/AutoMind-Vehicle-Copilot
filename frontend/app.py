@@ -38,6 +38,11 @@ VEHICLE_MANUAL_MAP = {
     "Toyota Corolla (2025)": "TOYOTA 2025(Corolla).pdf",
     "Tata Harrier BS6 (2026)": "harrier-bs6-owners-manual-april-2026.pdf",
     "Maruti Suzuki Jimny": "NEXA-Jimny-Petrol-Manual-latestpdf.pdf",
+    "Hyundai Tucson (2025)": "Hyundai-Tucson.pdf",
+    "Kia Sportage (2025)": "Kia-Sportage.pdf",
+    "MG Hector (2025)": "MG-Hector-Apr25.pdf",
+    "Nissan Rogue (2025)": "nissan-rogue.pdf",
+    "Renault Kiger (2025)": "renault-Kiger.pdf",
     "Not sure / Other": None,
 }
 
@@ -46,6 +51,11 @@ VEHICLE_ICONS = {
     "Toyota Corolla (2025)": "🚘",
     "Tata Harrier BS6 (2026)": "🚙",
     "Maruti Suzuki Jimny": "🛻",
+    "Hyundai Tucson (2025)": "🚐",
+    "Kia Sportage (2025)": "🚕",
+    "MG Hector (2025)": "🏎️",
+    "Nissan Rogue (2025)": "🚚",
+    "Renault Kiger (2025)": "🚛",
     "Not sure / Other": "❓",
 }
 
