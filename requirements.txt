@@ -3,7 +3,11 @@ pymupdf==1.24.10
 tiktoken==0.7.0
 
 # ---- Step 2: RAG (embeddings + FAISS) ----
-sentence-transformers==3.0.1
+# fastembed (ONNX runtime) instead of sentence-transformers — avoids pulling
+# in the full PyTorch library, which alone can exceed free-tier hosting
+# memory limits (e.g. Render's 512MB). Same underlying MiniLM model, same
+# 384-dim output.
+fastembed==0.3.6
 faiss-cpu==1.8.0.post1
 
 # ---- Step 3: Knowledge Graph ----

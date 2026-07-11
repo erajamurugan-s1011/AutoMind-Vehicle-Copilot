@@ -1,43 +1,40 @@
 """
 AutoMind — embeddings.
-Thin wrapper around Sentence-Transformers so the rest of the codebase
-never touches the model directly. Batches encoding for speed on your GPU.
+Uses fastembed (ONNX runtime) instead of sentence-transformers/torch. Same
+underlying MiniLM model and same 384-dim output, but without pulling in the
+full PyTorch library — critical for fitting inside constrained free-tier
+hosting (e.g. Render's 512MB RAM limit), where torch + transformers alone
+can exceed the memory budget before the app even finishes starting up.
 
-Requires: pip install sentence-transformers
+Requires: pip install fastembed
 """
 
 from typing import List
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 
 from src.config import EMBEDDING_MODEL_NAME
 
 _model = None  # lazy-loaded singleton so we don't reload the model on every import
 
 
-def get_embedding_model() -> SentenceTransformer:
+def get_embedding_model() -> TextEmbedding:
     global _model
     if _model is None:
-        print(f"🔧 Loading embedding model: {EMBEDDING_MODEL_NAME}")
-        _model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        print(f"🔧 Loading embedding model (fastembed/ONNX): {EMBEDDING_MODEL_NAME}")
+        _model = TextEmbedding(model_name=EMBEDDING_MODEL_NAME)
     return _model
 
 
 def embed_texts(texts: List[str], batch_size: int = 64) -> np.ndarray:
     """
     Encodes a list of strings into a (n, dim) float32 numpy array.
-    Normalizes embeddings so we can use cosine similarity via inner product
-    in FAISS (IndexFlatIP), which is faster than L2 for normalized vectors.
+    fastembed's all-MiniLM-L6-v2 output is already L2-normalized, so cosine
+    similarity via inner product (FAISS IndexFlatIP) works the same as before.
     """
     model = get_embedding_model()
-    embeddings = model.encode(
-        texts,
-        batch_size=batch_size,
-        show_progress_bar=True,
-        normalize_embeddings=True,   # critical: enables cosine-sim via dot product
-        convert_to_numpy=True,
-    )
-    return embeddings.astype("float32")
+    embeddings = list(model.embed(texts, batch_size=batch_size))
+    return np.array(embeddings).astype("float32")
 
 
 def embed_query(query: str) -> np.ndarray:
